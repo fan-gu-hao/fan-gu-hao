@@ -11,7 +11,7 @@ Hello, I'm **fan-gu-hao**. I build and validate embedded systems spanning Linux 
 | 技術領域（Area） | 實作重點（Hands-on Work） |
 | --- | --- |
 | **嵌入式 Linux／BSP／驅動整合**<br>Embedded Linux / BSP / Driver Integration | Linux 核心與模組編譯、pinctrl 驅動探測路徑修改與追蹤、裝置樹與 I²C／接腳資源配置、開機服務。<br>Kernel/module builds, pinctrl driver probe-path instrumentation, device-tree and I²C/pin resource configuration, and boot-time services. |
-| **異質多核心與即時系統**<br>Heterogeneous Multicore / RTOS | STM32MP1 Cortex-A7 ↔ Cortex-M4，以及 BeagleBone AI-64 的 A72 Linux ↔ C71／MMA ↔ R5F 協作；OpenAMP／RPMsg、remoteproc 與 FreeRTOS。<br>STM32MP1 Cortex-A7/M4 and BeagleBone AI-64 A72 Linux/C71-MMA/R5F integration; OpenAMP/RPMsg, remoteproc, and FreeRTOS. |
+| **異質多核心與即時系統**<br>Heterogeneous Multicore / RTOS | STM32MP1 Cortex-A7 Linux ↔ Cortex-M4 韌體、BeagleBone AI-64 的 A72 Linux ↔ C71／MMA ↔ R5F 協作，以及 STM32N6 的 FreeRTOS 多工作；包含 OpenAMP／RPMsg 與 remoteproc。<br>STM32MP1 Cortex-A7 Linux/Cortex-M4 firmware, BeagleBone AI-64 A72 Linux/C71-MMA/R5F integration, and STM32N6 FreeRTOS tasks; OpenAMP/RPMsg and remoteproc. |
 | **MCU AI／TinyML 相關部署／NPU**<br>MCU AI / TinyML-related Deployment / NPU | STM32N6 上的關鍵字辨識與視覺模型部署、INT8 量化、Neural-ART 編譯、板端驗證、效能與記憶體分析。<br>STM32N6 keyword spotting and vision deployment, INT8 quantization, Neural-ART compilation, and on-board performance/memory analysis. |
 | **平行處理與系統可靠性**<br>Concurrency / Reliability | 多程序、多執行緒、佇列與互斥鎖、DMA／快取一致性、影格時序與有效性管理、控制狀態機及故障保護。<br>Multiprocessing, multithreading, queues/locks, DMA/cache coherency, frame validity/timing, state machines, and fault handling. |
 | **跨核心記憶體與資料傳輸**<br>Cross-Core Memory / Transport | BeagleBone AI-64 的 DDR／MSMC 裝置樹保留區、連結器區段、遠端核心資源表、RPMsg 分塊傳圖與 CRC32 驗證。<br>DDR/MSMC reservation in the device tree, linker sections, remote-core resource tables, and chunked RPMsg image transport with CRC32 verification on BeagleBone AI-64. |
@@ -37,8 +37,8 @@ Integrated a custom-trained keyword-spotting (KWS) model and YOLOv8 vision infer
 
 **[查看專案與技術證據｜Repository and evidence](https://github.com/fan-gu-hao/stm32n6-voice-object-finder)**
 
-### 3. STM32MP1：Linux／FreeRTOS 異質核心與 BSP 整合
-**STM32MP1: Linux/FreeRTOS Heterogeneous Multicore and BSP Integration**
+### 3. STM32MP1：Linux／Cortex-M4 韌體異質核心與 BSP 整合
+**STM32MP1: Linux/Cortex-M4 Firmware Heterogeneous Multicore and BSP Integration**
 
 於 STM32MP157F-DK2 整合 Cortex-A7 Linux 與 Cortex-M4，以 OpenAMP／RPMsg 雙向傳送 VL53L0X 測距資料及控制命令。實作 Linux 核心與裝置樹建置、pinctrl 驅動探測紀錄修改、I²C5 與接腳資源配置、M4 感測器介面移植、圖形介面及 systemd 開機部署。
 
