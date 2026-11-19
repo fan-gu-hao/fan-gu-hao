@@ -2,18 +2,19 @@
 
 **Embedded Linux Kernel / BSP / Driver Integration · Heterogeneous Multicore · MCU AI / TinyML · Edge AI**
 
-你好，我是 **fan-gu-hao**。我專注於嵌入式 Linux 核心與板級支援套件（Board Support Package，BSP）、驅動程式原始碼分析與修改、異質多核心通訊，以及微控制器（MCU）與邊緣人工智慧（Edge AI）的實機整合。實作內容包括 Linux 裝置樹與 pinctrl 驅動探測流程除錯、感測器介面移植、FreeRTOS、多程序／多執行緒協作，以及模型量化與 NPU 板端部署。
+你好，我是 **fan-gu-hao**。我專注於嵌入式 Linux 核心與板級支援套件（Board Support Package，BSP）、驅動程式原始碼分析與修改、異質多核心通訊，以及微控制器（MCU）與邊緣人工智慧（Edge AI）的實機整合。實作內容涵蓋 Linux 裝置樹與 pinctrl 驅動探測流程除錯、感測器介面移植、FreeRTOS、多程序／多執行緒協作、DDR／MSMC 記憶體資源配置、跨核心訊息傳輸，以及 Hailo-8L 與 TI C71／MMA 等 AI 加速平台的量化與部署。
 
-Hello, I'm **fan-gu-hao**. I build and validate embedded systems spanning Linux kernel/BSP integration, driver source analysis and targeted modifications, inter-processor communication, microcontroller firmware, concurrent real-time systems, and MCU/edge AI inference. My focus is on making hardware, operating systems, and AI workloads work together reliably on real boards.
+Hello, I'm **fan-gu-hao**. I build and validate embedded systems spanning Linux kernel/BSP integration, driver source analysis and targeted modifications, inter-processor communication, microcontroller firmware, concurrent real-time systems, and MCU/edge AI inference. My work also covers DDR/MSMC memory reservation, cross-core messaging, and AI deployment on Hailo-8L and TI C71/MMA platforms. My focus is on making hardware, operating systems, and AI workloads work together reliably on real boards.
 
 ## 核心工程能力｜Technical Focus
 
 | 技術領域（Area） | 實作重點（Hands-on Work） |
 | --- | --- |
 | **嵌入式 Linux／BSP／驅動整合**<br>Embedded Linux / BSP / Driver Integration | Linux 核心與模組編譯、pinctrl 驅動探測路徑修改與追蹤、裝置樹與 I²C／接腳資源配置、開機服務。<br>Kernel/module builds, pinctrl driver probe-path instrumentation, device-tree and I²C/pin resource configuration, and boot-time services. |
-| **異質多核心與即時系統**<br>Heterogeneous Multicore / RTOS | Cortex-A7 ↔ Cortex-M4、OpenAMP／RPMsg、遠端處理器管理（remoteproc）、FreeRTOS 工作協作。<br>Cortex-A7 ↔ Cortex-M4 IPC, OpenAMP/RPMsg, remoteproc, and FreeRTOS task coordination. |
+| **異質多核心與即時系統**<br>Heterogeneous Multicore / RTOS | STM32MP1 Cortex-A7 ↔ Cortex-M4，以及 BeagleBone AI-64 的 A72 Linux ↔ C71／MMA ↔ R5F 協作；OpenAMP／RPMsg、remoteproc 與 FreeRTOS。<br>STM32MP1 Cortex-A7/M4 and BeagleBone AI-64 A72 Linux/C71-MMA/R5F integration; OpenAMP/RPMsg, remoteproc, and FreeRTOS. |
 | **MCU AI／TinyML 相關部署／NPU**<br>MCU AI / TinyML-related Deployment / NPU | STM32N6 上的關鍵字辨識與視覺模型部署、INT8 量化、Neural-ART 編譯、板端驗證、效能與記憶體分析。<br>STM32N6 keyword spotting and vision deployment, INT8 quantization, Neural-ART compilation, and on-board performance/memory analysis. |
-| **平行處理與系統可靠性**<br>Concurrency / Reliability | 多程序、多執行緒、佇列與互斥鎖、DMA／快取一致性、控制狀態機與故障保護。<br>Multiprocessing, multithreading, queues/locks, DMA/cache coherency, state machines, and fault handling. |
+| **平行處理與系統可靠性**<br>Concurrency / Reliability | 多程序、多執行緒、佇列與互斥鎖、DMA／快取一致性、影格時序與有效性管理、控制狀態機及故障保護。<br>Multiprocessing, multithreading, queues/locks, DMA/cache coherency, frame validity/timing, state machines, and fault handling. |
+| **跨核心記憶體與資料傳輸**<br>Cross-Core Memory / Transport | BeagleBone AI-64 的 DDR／MSMC 裝置樹保留區、連結器區段、遠端核心資源表、RPMsg 分塊傳圖與 CRC32 驗證。<br>DDR/MSMC reservation in the device tree, linker sections, remote-core resource tables, and chunked RPMsg image transport with CRC32 verification on BeagleBone AI-64. |
 | **MCU 與硬體介面**<br>MCU / Hardware Interfaces | C 語言韌體、GPIO、PWM、UART、I²C、計時器、中斷與感測器整合。<br>C firmware, GPIO, PWM, UART, I²C, timers, interrupts, and sensor integration. |
 
 ## 代表作品｜Featured Engineering Projects
@@ -54,6 +55,18 @@ Independently developed the vehicle from hardware selection and power distributi
 
 **[查看完整專案｜Repository](https://github.com/fan-gu-hao/smart-car)** · **[觀看實機展示｜Demo video](https://youtu.be/pAVebk_odPo)**
 
+### 5. BeagleBone AI-64：異質多核心、雙 AI 加速單元與感測融合
+**BeagleBone AI-64: Heterogeneous Multicore, Dual AI Acceleration and Sensor Fusion**
+
+整合 **A72 Linux、Hailo-8L、TI C71 DSP／MMA 與 R5F**，完成 YOLOv8n 物件偵測、MobileNetV2 人體姿態估計、HX711 荷重感測及 MLX90614 紅外線表面測溫。由人物偵測框引導姿態模型裁切，再結合手腕線索、荷重事件與溫度資訊。底層實作涵蓋 **DDR／MSMC 保留記憶體、連結器區段、遠端處理器資源表、RPMsg 分塊影像傳輸與 CRC32、C71／MMA 模型服務及 R5F 感測韌體**，並使用獨立服務、多程序與多執行緒整合。已保存的整合展示結果約為 **9.7～10.1 幀／秒**；這是整個展示流程的速度，不是單一加速器的獨立吞吐量。
+
+Integrated **A72 Linux, Hailo-8L, TI C71 DSP/MMA, and R5F** for YOLOv8n object detection, MobileNetV2 human pose estimation, HX711 load sensing, and MLX90614 infrared surface temperature acquisition. Person detection guides pose cropping, while wrist proximity, load transitions, and temperature contribute to event descriptions. Low-level work includes **DDR/MSMC reserved memory, linker sections, remote-processor resource tables, chunked RPMsg image transfer with CRC32, a C71/MMA inference service, and R5F sensor firmware**, coordinated through separate services, processes, and threads. The recorded end-to-end demonstration ran at approximately **9.7–10.1 frames/s**; this is not standalone accelerator throughput.
+
+*「雙 NPU」是專案中對 Hailo-8L 與 TI MMA 兩個加速單元的簡稱；C71 本身是 DSP，不是另一顆獨立 NPU。*
+*“Dual NPU” is project shorthand for the Hailo-8L and TI MMA acceleration units; C71 itself is a DSP, not an additional standalone NPU.*
+
+**[查看系統架構、原始碼與驗證紀錄｜Repository, architecture and validation](https://github.com/fan-gu-hao/beaglebone-ai64-hailo8l-heterogeneous-multicore-dual-npu-dual-model-collaborative-inference)**
+
 ## 開發方式｜Engineering Approach
 
 我重視**可重建、可量測、可追溯**的工程成果。各專案儲存庫盡可能保留核心原始碼、系統架構、部署步驟、測試紀錄，以及自行實作與第三方元件的界線；效能數據也會標明量測條件及適用範圍。
@@ -62,5 +75,5 @@ I prioritize **reproducibility, measurement, and traceability**. My repositories
 
 ---
 
-**目前關注方向｜Areas of Interest:** 嵌入式 Linux／BSP、Linux 裝置驅動開發、底層韌體、異質多核心、MCU AI／TinyML 及 NPU／GPU 軟硬體整合。  
-**Current Focus:** Embedded Linux/BSP, Linux device driver development, low-level firmware, heterogeneous multicore systems, MCU AI/TinyML, and NPU/GPU software–hardware integration.
+**目前關注方向｜Areas of Interest:** 嵌入式 Linux／BSP、Linux 裝置驅動開發、底層韌體、異質多核心、MCU AI／TinyML，以及 NPU／GPU／DSP 軟硬體整合。  
+**Current Focus:** Embedded Linux/BSP, Linux device driver development, low-level firmware, heterogeneous multicore systems, MCU AI/TinyML, and NPU/GPU/DSP software–hardware integration.
